@@ -5,6 +5,8 @@
 #include <drivers/can.h>
 #include <drivers/gpio.h>
 #include <sys/byteorder.h>
+#include <stdio.h>
+
 
 CAN_DEFINE_MSGQ(bms_queue, 150);
 CAN_DEFINE_MSGQ(imu_queue, 150);
@@ -47,7 +49,7 @@ void main(void) {
     filter_id_mtr = can_attach_msgq(can_dev, &mtr_queue, &mtr_filter);
 
     if (filter_id_imu < 0 || filter_id_bms < 0 || filter_id_mtr < 0) {
-        LOG_ERR("Unable to attach isr imu:[%d] bms:[%d] mtr:[%d] ", filter_id_imu,filter_id_bms,filter_id_mtr);
+        printk("Unable to attach isr imu:[%d] bms:[%d] mtr:[%d] ", filter_id_imu,filter_id_bms,filter_id_mtr);
         return;
     }
 
