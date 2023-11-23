@@ -5,7 +5,7 @@
 #include <drivers/can.h>
 #include <drivers/gpio.h>
 #include <sys/byteorder.h>
-//
+//LED CONFIG
 #define LED0_NODE DT_ALIAS(led0)
 #define LED0    DT_GPIO_LABEL(LED0_NODE, gpios)
 #define PIN0    DT_GPIO_PIN(LED0_NODE, gpios)
@@ -55,15 +55,6 @@ const struct zcan_filter mtr_filter = {
         .id_mask = CAN_EXT_ID_MASK
 };
 
-
-struct can_msg //can data message struct for queue
-{
-    int32_t id;
-    uint8_t data[8]; 
-};
-
-
-
 //message queue to store the incoming CAN Messages
 CAN_DEFINE_MSGQ(bms_queue, 150);
 CAN_DEFINE_MSGQ(imu_queue, 150);
@@ -75,62 +66,6 @@ int filter_id_imu;
 int filter_id_bms;
 int filter_id_mtr;
 const struct device *can_dev;
-
-//Used for CAN attach ISR for callback onto queue structure
-void rx_callback_function(struct zcan_frame *zframe, void *arg)
-{
-        //gpio_pin_set(led_dev, PIN0, (int)true);//red led
-        struct can_msg can_message;
-        can_message.id= zframe->id;
-        //gpio_pin_set(led_dev, PIN0, (int)true);//red led
-        for(int i=0; i<8; i++)
-        {
-            gpio_pin_set(led_dev, PIN0, (int)true);//red led
-            k_msleep(1000);
-            gpio_pin_set(led_dev, PIN0, (int)false);//red led
-            can_message.data[i]= zframe->data[i];
-        }
-        //gpio_pin_set(led_dev, PIN0, (int)true);//red led
-        int check= k_msgq_put(&imu_queue, &can_message, K_NO_WAIT);
-        
-       // k_msleep(1000);
-        //gpio_pin_set(led_dev, PIN0, (int)false);//red led
-        if(check==-ENOMSG)
-        {
-            //k_msleep(150);
-            gpio_pin_set(led_dev, PIN0, (int)true);//red led
-            k_msleep(150);
-            gpio_pin_set(led_dev, PIN0, (int)false);
-            k_msleep(150); 
-        }
-        if(check==-EAGAIN)
-        {
-            gpio_pin_set(led_dev1, PIN1, (int)true);//orange led
-            k_msleep(100);
-            gpio_pin_set(led_dev1, PIN1, (int)false);
-            k_msleep(150); 
-        }
-        if(check==0)
-        {
-            gpio_pin_set(led_dev2, PIN2, (int)true);//green led
-            k_msleep(100);
-            gpio_pin_set(led_dev2, PIN2, (int)false);
-            k_msleep(150); 
-        }
-        else
-        {
-            gpio_pin_set(led_dev2, PIN2, (int)true);//green led
-        }
-        // if(check > 0)
-        // {
-        //     gpio_pin_set(led_dev2, PIN2, (int)true);//green led
-        //     k_msleep(100);
-        //     gpio_pin_set(led_dev2, PIN2, (int)false);
-        //     k_msleep(150); 
-        // }
-        
-}
-
 
 void led_setup()
 {
@@ -145,76 +80,83 @@ void led_setup()
 
 }
 
+void led_on(char color)
+{
+    if(color == 'r')
+    {
+        gpio_pin_set(led_dev, PIN0, (int)true); //red
+    }
+    else if(color == 'o')
+    {
+        gpio_pin_set(led_dev1, PIN1, (int)true); //orange
+    }
+    else if(color == 'g')
+    {
+        gpio_pin_set(led_dev2, PIN2, (int)true); //green
+    }
+    else if(color == 'b')
+    {
+        gpio_pin_set(led_dev3, PIN3, (int)true); //blue
+    }
+    
+}
 
-void receive_main(void) {
+
+void led_off(char color)
+{
+    if(color == 'r')
+    {
+        gpio_pin_set(led_dev, PIN0, (int)false); //red
+    }
+    else if(color == 'o')
+    {
+        gpio_pin_set(led_dev1, PIN1, (int)false); //orange
+    }
+    else if(color == 'g')
+    {
+        gpio_pin_set(led_dev2, PIN2, (int)false); //green
+    }
+    else if(color == 'b')
+    {
+        gpio_pin_set(led_dev3, PIN3, (int)false); //blue
+    }
+    
+}
+
+void receive_main(void) 
+{   //can device setup
     can_dev = device_get_binding("CAN_1");
     can_set_mode(can_dev, CAN_NORMAL_MODE);
 
     led_setup();
-
-
+    //Adding messages from CAN bus to their respective queues
     filter_id_imu = can_attach_msgq(can_dev, &imu_queue, &imu_filter);
-    filter_id_bms = can_attach_msgq(can_dev, &bms_queue, &imu_filter);
-    filter_id_mtr = can_attach_msgq(can_dev, &mtr_queue, &imu_filter);
-
-    //int callback_check = can_attach_isr(can_dev, &rx_callback_function, NULL, &imu_filter);
-     
+    filter_id_bms = can_attach_msgq(can_dev, &bms_queue, &bms_filter);
+    filter_id_mtr = can_attach_msgq(can_dev, &mtr_queue, &mtr_filter);
 
     if (filter_id_imu < 0 || filter_id_bms < 0 || filter_id_mtr < 0) {
         printk("Unable to attach isr imu:[%d] bms:[%d] mtr:[%d] ", filter_id_imu,filter_id_bms,filter_id_mtr);
         return;
     }
 
-    while (true) {
-//////
-        if(filter_id_bms == bms_filter.id)
-        {
-            //k_msgq_get(&bms_queue, &rx_frame, K_MSEC(50));
-            gpio_pin_set(led_dev, PIN0, (int)true);
-        }
-        // if(callback_check == CAN_NO_FREE_FILTER)
-        // {
-        //     //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-        //     gpio_pin_set(led_dev2, PIN2, (int)true); //green
-        // }
-        // if(callback_check < 0)
-        // {
-        //     //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-        //     gpio_pin_set(led_dev3, PIN3, (int)true); //blue
-        // }
-        // if(callback_check > 0)
-        // {
-        //     //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-        //     gpio_pin_set(led_dev3, PIN3, (int)true); //blue
-        // }
-        if(filter_id_imu == CAN_NO_FREE_FILTER)
-        {
-            //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-            gpio_pin_set(led_dev1, PIN1, (int)true); //orange
-        }
+    while (true) 
+    {
+
+        ///Check = zero for each attachment to their respective queue using can_attaach_msq from the CAN bus with messages
         if(filter_id_imu == 0)
         {
-            //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-            gpio_pin_set(led_dev1, PIN1, (int)true); //orange
+            led_on('r');
         }
-        if(filter_id_imu < 0)
+        if(filter_id_bms == 0)
         {
-            //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-            gpio_pin_set(led_dev1, PIN1, (int)true); //orange
+            led_on('o');
         }
-    
-        if(filter_id_bms == 1)
+        if(filter_id_mtr == 0)
         {
-            //k_msgq_get(&imu_queue, &rx_frame, K_MSEC(60));
-            gpio_pin_set(led_dev3, PIN3, (int)true); //blue
-        }
-        if(filter_id_mtr == 2)
-        {
-            //k_msgq_get(&mtr_queue, &rx_frame, K_MSEC(70));
-            gpio_pin_set(led_dev2, PIN2, (int)true); //green
+            led_on('b');
         }
 
-        //TODO Here SPI conversion here
+        ///TODO Here SPI conversion here
     }
     
 }
