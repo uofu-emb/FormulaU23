@@ -90,8 +90,9 @@ void send_main(void)
   
         while(1)
         {
-                //send_message(&frame1); //send message 1
-                send_message(&frame2); //send message 2
+                send_message(&frame1); //send message 1
+                //send_message(&frame2); //send message 2
+                k_msleep(150);
                 //send_message(&frame3); //send message 3
         }
 
