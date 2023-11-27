@@ -5,6 +5,10 @@
 #include <drivers/can.h>
 #include <drivers/gpio.h>
 #include <sys/byteorder.h>
+#include <drivers/uart.h>
+//#include <string.h>
+#include <stdio.h>
+
 //LED CONFIG
 #define LED0_NODE DT_ALIAS(led0)
 #define LED0    DT_GPIO_LABEL(LED0_NODE, gpios)
@@ -30,6 +34,31 @@ const struct device *led_dev;
 const struct device *led_dev1;
 const struct device *led_dev2;
 const struct device *led_dev3;
+
+const char * uart_name = "UART_1";
+const struct device *uart_dev;
+//int ret;
+
+#define BUF_SIZE 64
+
+uint8_t rx_buf[BUF_SIZE];
+uint8_t tx_buf[] = "Hello, UART!\n";
+
+void print_terminal(uint8_t message[], unsigned int message_size);
+
+
+
+void uart_setup(){
+    uart_dev = device_get_binding(uart_name);
+    struct uart_config uart_cfg = {
+        .baudrate =9600,
+        .parity = UART_CFG_PARITY_NONE,
+        .stop_bits = UART_CFG_STOP_BITS_1,
+        .data_bits = UART_CFG_DATA_BITS_8,
+    };
+
+    int ret = uart_configure(uart_dev, &uart_cfg);
+}
 
 const struct zcan_filter imu_filter = {
         .id_type = CAN_STANDARD_IDENTIFIER,
@@ -101,7 +130,6 @@ void led_on(char color)
     
 }
 
-
 void led_off(char color)
 {
     if(color == 'r')
@@ -129,6 +157,9 @@ void receive_main(void)
     can_set_mode(can_dev, CAN_NORMAL_MODE);
 
     led_setup();
+
+    uart_setup();
+
     //Adding messages from CAN bus to their respective queues
     filter_id_imu = can_attach_msgq(can_dev, &imu_queue, &imu_filter);
     filter_id_bms = can_attach_msgq(can_dev, &bms_queue, &bms_filter);
@@ -136,9 +167,13 @@ void receive_main(void)
 
     if (filter_id_imu < 0 || filter_id_bms < 0 || filter_id_mtr < 0) {
         printk("Unable to attach isr imu:[%d] bms:[%d] mtr:[%d] ", filter_id_imu,filter_id_bms,filter_id_mtr);
+        
+        uint8_t error_filter[] = "unable to attach isr";
+        print_terminal(error_filter, sizeof(error_filter));
         return;
     }
-
+    uint8_t test_message[] = "Right before the while loop \n\r";
+    print_terminal(test_message, sizeof(test_message));
     while (true) 
     {
 
@@ -146,6 +181,7 @@ void receive_main(void)
         if(filter_id_imu == 0)
         {
             led_on('r');
+            //print_terminal(tx_buf, sizeof(tx_buf));
         }
         if(filter_id_bms == 0)
         {
@@ -158,8 +194,13 @@ void receive_main(void)
 
         ///TODO Here SPI conversion here
     }
-    
 }
 
+void print_terminal(uint8_t message[], unsigned int message_size){
 
+    for(int i = 0; i < message_size; i++)
+    {
+        uart_poll_out(uart_dev, message[i]);
+    }
+}
 
