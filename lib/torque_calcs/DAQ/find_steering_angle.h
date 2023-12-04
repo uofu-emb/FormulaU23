@@ -3,3 +3,5 @@
 #define FIND_STEERING_ANGLE.H_INCLUDED
 
 #endif
+
+float fsteeringAngle(float steering_sensor_voltage);
