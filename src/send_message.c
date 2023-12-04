@@ -28,8 +28,8 @@ struct zcan_frame frame2 =
                 .data = {1,2,3,4,5}
 
         };
-//message -3
-struct zcan_frame frame3 = 
+//message -3. Motor Control: TODO: fill in the data below.
+struct zcan_frame frame3MtrCntrl = 
         {
                 .id_type = CAN_STANDARD_IDENTIFIER,
                 .rtr = CAN_DATAFRAME,
@@ -93,7 +93,7 @@ void send_main(void)
                 send_message(&frame1); //send message 1
                 //send_message(&frame2); //send message 2
                 k_msleep(150);
-                //send_message(&frame3); //send message 3
+                send_message(&frame3MtrCntrl); //send message 3
         }
 
 }
