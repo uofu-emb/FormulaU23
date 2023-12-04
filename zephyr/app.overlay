@@ -1,0 +1,5 @@
+&rtc {
+    prescaler = < 0x0010 >;
+    status = "okay";
+};
+
