@@ -15,4 +15,8 @@ void main(void)
         receive_main();
     #endif
 
+    #ifdef SLAVE_SETUP
+        slave_setup_main();
+    #endif
+
 }
