@@ -33,6 +33,7 @@ static void uart_callback(const struct device *dev, struct uart_event *evt)
 
 void main(void)
 { 
+    printk("fuck");  
     const struct device *uart = device_get_binding(DT_LABEL(UART));
     if (!device_is_ready(uart)) {
         return;
@@ -49,10 +50,11 @@ void main(void)
 
     printk("UART Configured\n");
 
-    uart_callback_set(uart, uart_callback, NULL);
+    uart_callback_set(uart, uart_callback, NULL); 
 
     while (1) {
         // Your main application logic here
+        printf("i'm running\n");
         k_sleep(K_SECONDS(1));
     }
 }
