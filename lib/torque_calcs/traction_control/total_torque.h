@@ -3,3 +3,5 @@
 #define TOTAL_TORQUE.H_INCLUDED
 
 #endif
+
+float TotalTorque(float throttle_sensor_voltage);

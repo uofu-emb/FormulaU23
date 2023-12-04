@@ -3,3 +3,5 @@
 #define FIND_RADIUS_TURN.H_INCLUDED
 
 #endif
+
+float FindRTurn(float Tf, float L, float steeringAngle);

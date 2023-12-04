@@ -13,7 +13,6 @@ void fsteeringAngle() {
       steeringAngle = 0.0;
     }
 }
-// DONE
 
 // Computes the total torque from the throttle input
 // the total torque is the torque being sent to both motors combined
@@ -26,6 +25,8 @@ void TotalTorque(){
     float nRange = (nMax - nMin);
     torqueOutput = (((throttleVolts - oMin) * nRange) / oRange) + nMin;  // rad
 }
+
+// DONE
 
 // Computes the radius of the turn based on the steering angle and vehicle parameters
 void FindRTurn(){
