@@ -1,0 +1,82 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "c:/Users/henry/Desktop/AES_Final/FormulaU23/include",
+                "c:/Users/henry/Desktop/AES_Final/FormulaU23/src",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/include",
+                "C:/Users/henry/Desktop/AES_Final/FormulaU23/.pio/build/disco_f072rb/zephyr/include/generated",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32f0",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/drivers",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/soc",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                "c:/Users/henry/Desktop/AES_Final/FormulaU23/.pio/libdeps/disco_f072rb/Unity/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "c:/Users/henry/Desktop/AES_Final/FormulaU23/include",
+                    "c:/Users/henry/Desktop/AES_Final/FormulaU23/src",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/include",
+                    "C:/Users/henry/Desktop/AES_Final/FormulaU23/.pio/build/disco_f072rb/zephyr/include/generated",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/soc/arm/st_stm32/stm32f0",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/drivers",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/soc/arm/st_stm32/common",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/cmsis/CMSIS/Core/Include",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/soc",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/stm32f0xx/drivers/include/Legacy",
+                    "C:/Users/henry/.platformio/packages/framework-zephyr/_pio/modules/hal/stm32/stm32cube/common_ll/include",
+                    "c:/Users/henry/Desktop/AES_Final/FormulaU23/.pio/libdeps/disco_f072rb/Unity/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60111",
+                "STM32F072xB",
+                "BUILD_VERSION=zephyr-v20701",
+                "HSE_VALUE=8000000",
+                "KERNEL",
+                "STM32F072xB",
+                "USE_FULL_LL_DRIVER",
+                "USE_HAL_DRIVER",
+                "_FORTIFY_SOURCE=2",
+                "__PROGRAM_START",
+                "__ZEPHYR__=1",
+                ""
+            ],
+            "cStandard": "c99",
+            "forcedInclude": [
+                "C:/Users/henry/Desktop/AES_Final/FormulaU23/.pio/build/disco_f072rb/zephyr/include/generated/autoconf.h",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/include/toolchain/zephyr_stdint.h",
+                ""
+            ],
+            "compilerPath": "C:/Users/henry/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mcpu=cortex-m0",
+                "-mthumb",
+                "-mabi=aapcs",
+                "-mfp16-format=ieee",
+                "-isystem",
+                "C:/Users/henry/.platformio/packages/framework-zephyr/lib/libc/minimal/include",
+                "-isystem",
+                "c:/users/henry/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/8.2.1/include",
+                "-isystem",
+                "c:/users/henry/.platformio/packages/toolchain-gccarmnoneeabi/bin/../lib/gcc/arm-none-eabi/8.2.1/include-fixed",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
