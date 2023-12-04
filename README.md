@@ -1,5 +1,5 @@
 # GPS for FormUla 1
-The gps functionality is provided by a GT-U7 chip.[https://images-na.ssl-images-amazon.com/images/I/91tuvtrO2jL.pdf] The breakout board has 5 pins
+The gps functionality is provided by a [GT-U7 chip](https://images-na.ssl-images-amazon.com/images/I/91tuvtrO2jL.pdf). The breakout board has 5 pins
 |Pin|Description|
 |----|------|
 |VCC| Power pin, 5V|
