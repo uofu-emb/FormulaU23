@@ -2,7 +2,8 @@
 #include <device.h>
 #include <drivers/uart.h>
 
-#define UART DT_NODELABEL(usart1)
+#define UART1 DT_NODELABEL(usart1)
+#define UART3 DT_NODELABEL(usart3)
 
 const struct uart_config uart_cfg = {
 		.baudrate = 9600,
@@ -32,25 +33,31 @@ static void uart_callback(const struct device *dev, struct uart_event *evt)
 }
 
 void main(void)
-{ 
-    printk("fuck");  
-    const struct device *uart = device_get_binding(DT_LABEL(UART));
-    if (!device_is_ready(uart)) {
+{  
+
+    const struct device *uart1 = device_get_binding(DT_LABEL(UART1));
+    if (!device_is_ready(uart1)) {
         return;
     }
-
+    
+    printk("DISCO UART initialized\n");
     
 
-    printk("UART initialized\n");
+    const struct device *uart3 = device_get_binding(DT_LABEL(UART3));
+    if (!device_is_ready(uart3)) {
+        return;
+    }
     
-    int err = uart_configure(uart, &uart_cfg);
+    printk("DISCO UART initialized\n");
+    
+    int err = uart_configure(uart3, &uart_cfg);
 	if (err == -ENOSYS) {
 		return -ENOSYS;
 	}
 
     printk("UART Configured\n");
 
-    uart_callback_set(uart, uart_callback, NULL); 
+    uart_callback_set(uart3, uart_callback, NULL); 
 
     while (1) {
         // Your main application logic here
