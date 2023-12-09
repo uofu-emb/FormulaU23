@@ -199,7 +199,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the "" License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -219,4 +219,38 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 * []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/ctapiero/Lab6.svg?style=for-the-badge
+[contributors-url]: https://github.com/ctapiero/Lab6/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ctapiero/Lab6.svg?style=for-the-badge
+[forks-url]: https://github.com/ctapiero/Lab6/network/members
+[stars-shield]: https://img.shields.io/github/stars/ctapiero/Lab6.svg?style=for-the-badge
+[stars-url]: https://github.com/ctapiero/Lab6/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ctapiero/Lab6.svg?style=for-the-badge
+[issues-url]: https://github.com/ctapiero/Lab6/issues
+[license-shield]: https://img.shields.io/github/license/ctapiero/Lab6.svg?style=for-the-badge
+[license-url]: https://github.com/ctapiero/Lab6/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: images/screenshot.png
+[cpp-shield]: https://img.shields.io/badge/-c++-black?logo=c%2B%2B&style=social
+[cpp-url]: https://cplusplus.com/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
 
