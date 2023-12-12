@@ -30,7 +30,7 @@ const struct device *sled_dev3;
 
 #define I2C_LABEL DT_PROP(DT_NODELABEL(i2c1), label)
 
-void sled_setup()
+void led_setup_i2c()
 {
     sled_dev = device_get_binding(LED0);
     sled_dev1 = device_get_binding(LED1);
@@ -43,7 +43,7 @@ void sled_setup()
 
 }
 
-void sled_on(char color)
+void led_on_i2c(char color)
 {
     if(color == 'r')
     {
@@ -64,7 +64,7 @@ void sled_on(char color)
     
 }
 
-void sled_off(char color)
+void led_off_i2c(char color)
 {
     if(color == 'r')
     {
@@ -86,7 +86,7 @@ void sled_off(char color)
 }
 
 void slave_setup_main(){
-    sled_setup();
+    led_setup_i2c();
     const struct device * i2c_device;
 
     i2c_device = device_get_binding(I2C_LABEL);
@@ -102,22 +102,22 @@ void slave_setup_main(){
 
     if(result == 0)
     {
-        sled_on('g');
+        led_on_i2c('g');
     }
     else if(result == EINVAL)
     {
-        sled_on('o');
+        led_on_i2c('o');
     }
     else if(result == EIO)
     {
-        sled_on('r');
+        led_on_i2c('r');
     }
     else if(result == ENOSYS)
     {
-        sled_on('b');
+        led_on_i2c('b');
     }
     else 
     {
-        sled_on('g');
+        led_on_i2c('g');
     }
 }
