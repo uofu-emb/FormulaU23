@@ -1,3 +1,17 @@
+/***
+* FILENAME : slave_setup.c
+*
+* DESCRIPTION :
+*       Setting up STM32F as a Slave device. 
+*
+* PUBLIC FUNCTIONS :
+*       void     led_setup_i2c  ( void )
+*       void     led_on_i2c     ( char )
+*       void     led_off_i2c    ( char )
+*
+* AUTHOR : Brittney and Freddy
+***/
+
 #include <drivers/i2c.h>
 #include <stdio.h>
 #include <drivers/gpio.h>
