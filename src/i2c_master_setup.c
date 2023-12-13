@@ -11,6 +11,7 @@
 #define PIN0 DT_GPIO_PIN(LED0_NODE, gpios)
 #define FLAGS0 DT_GPIO_FLAGS(LED0_NODE, gpios)
 
+/*Error LED DT reference*/
 #define LED1_NODE DT_ALIAS(led3)
 #define LED1 DT_GPIO_LABEL(LED1_NODE, gpios)
 #define PIN1 DT_GPIO_PIN(LED1_NODE, gpios)
