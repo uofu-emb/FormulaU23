@@ -4,7 +4,7 @@
 extern void send_main(void);
 extern void receive_main(void);
 extern void slave_setup_main(void);
-extern int i2c_master_main(void);
+extern void i2c_master_main(void);
 
 void main(void)
 {
