@@ -9,6 +9,8 @@
 //#include <string.h>
 #include <stdio.h>
 
+#include "timestamp.h"
+
 //LED CONFIG
 #define LED0_NODE DT_ALIAS(led0)
 #define LED0    DT_GPIO_LABEL(LED0_NODE, gpios)
@@ -204,3 +206,37 @@ void print_terminal(uint8_t message[], unsigned int message_size){
     }
 }
 
+void rtc_main(void){
+    uint32_t test_time = 0;
+    uint32_t expected = 0x00000004;
+
+    led_setup();
+    //printk("owo");
+    setup_RTC();
+
+    //resetTime();
+
+    k_sleep(K_MSEC(5000));
+    //k_msleep(6000);
+
+    //test_time = getTimeStamp();
+
+    //printk("%8x", test_time);
+
+    while(1){
+        //if(test_time == expected){
+        if(test_time == expected){
+            led_on('b');
+        }
+        else{
+            led_on('r');
+        }
+
+        k_sleep(K_MSEC(1000));
+       //k_msleep(6000);
+
+        test_time = getTimeStamp();
+
+        printk("%8x", test_time);
+    }
+}
