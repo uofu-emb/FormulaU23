@@ -7,7 +7,7 @@ extern void receive_main(void);
 extern void rtc_main(void);
 
 extern void slave_setup_main(void);
-
+extern void i2c_master_main(void);
 
 
 void main(void)
@@ -28,4 +28,7 @@ void main(void)
         slave_setup_main();
     #endif
 
+    #ifdef I2C_MASTER_ACTIVITY
+        i2c_master_main();
+    #endif
 }
